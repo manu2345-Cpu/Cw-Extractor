@@ -20,7 +20,11 @@ import requests
 bot = Client(
     "CW",
     bot_token=os.environ.get("BOT_TOKEN"),
-    api_id=int(os.environ.get("API_ID")),
+    api_id_value = os.environ.get("API_ID")
+if api_id_value and api_id_value.isdigit():
+    api_id = int(api_id_value)
+else:
+    print("API_ID is not a valid integer."),
     api_hash=os.environ.get("API_HASH")
 )
 
