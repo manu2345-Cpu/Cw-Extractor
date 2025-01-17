@@ -16,3 +16,13 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Command to run the application
 CMD ["python3", "main.py"]
+
+# Ensure the system is updated
+RUN apt-get update && apt-get install -y build-essential
+
+# Upgrade pip
+RUN python -m pip install --upgrade pip
+
+# Install dependencies from requirements.txt
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
