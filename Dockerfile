@@ -1,14 +1,18 @@
 
-FROM python:3.10-slim
+# Specify an Alpine-based image
+FROM alpine:latest
 
-RUN apt-get update && apt-get install -y gcc libffi-dev musl-dev ffmpeg aria2 && \
-    pip install --no-cache-dir -r requirements.txt
+# Install dependencies
+RUN apk add --no-cache gcc libffi-dev musl-dev ffmpeg aria2 python3 py3-pip
 
-WORKDIR .
-RUN apt -qq update && apt -qq install -y git wget pv jq python3-dev ffmpeg mediainfo
-COPY . .
-RUN pip3 install -r requirements.txt
-RUN apk add --no-cache gcc libffi-dev musl-dev ffmpeg aria2 && pip install --no-cache-dir -r requirements.txt
-RUN apt install ffmpeg
+# Copy application files
+COPY . /app
 
+# Set working directory
+WORKDIR /app
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Command to run the application
 CMD ["python3", "main.py"]
