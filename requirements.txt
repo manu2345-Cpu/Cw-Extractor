@@ -10,4 +10,5 @@ ffprobe
 asyncio
 humanize
 uvloop
+flask
 
