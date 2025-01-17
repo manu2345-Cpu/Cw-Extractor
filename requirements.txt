@@ -10,4 +10,4 @@ ffprobe
 asyncio
 humanize
 uvloop
-socket
+
