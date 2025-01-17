@@ -1,4 +1,5 @@
 import requests
+import socket
 import json
 import subprocess
 from pyrogram.types.messages_and_media import message
@@ -37,6 +38,29 @@ async def start(bot, update):
                                        
                                        "Press **/login** to continue..\n\n"
                                      "Bot made by **UnityBro**" )
+    
+
+# Create a socket object
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Get the host (IP) and port to bind to
+host = '127.0.0.1'  # Localhost (or use '' for all available interfaces)
+port = 8080  # The port number you want to bind
+
+# Bind the socket to the address (host, port)
+server_socket.bind((host, port))
+
+# Start listening for incoming connections
+server_socket.listen(5)
+print(f"Server is listening on {host}:{port}")
+
+# Accept a connection
+client_socket, client_address = server_socket.accept()
+print(f"Connection established with {client_address}")
+
+# Close the connection
+client_socket.close()
+server_socket.close()
 
 ACCOUNT_ID = "6206459123001"
 BCOV_POLICY = "BCpkADawqM1474MvKwYlMRZNBPoqkJY-UWm7zE1U769d5r5kqTjG0v8L-THXuVZtdIQJpfMPB37L_VJQxTKeNeLO2Eac_yMywEgyV9GjFDQ2LTiT4FEiHhKAUvdbx9ku6fGnQKSMB8J5uIDd"
