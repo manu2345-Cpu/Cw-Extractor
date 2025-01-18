@@ -336,20 +336,19 @@ async def account_login(bot: Client, m: Message):
 
 
 
-import os 
+import os
 from flask import Flask
 
 app = Flask(_name_)
 
-# Your route definitions go here
+# Define at least one route
+@app.route("/")
+def home():
+    return "Hello, Flask is running!"
 
 if _name_ == "_main_":
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 5000))  # Default port is 5000 if not set
     app.run(host="0.0.0.0", port=port)
-    
-
-
-
                 
                 
         
